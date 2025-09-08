@@ -48,7 +48,6 @@ app.post('/api/logs', async (req, res) => {
       headers: { 'Authorization': token }
     });
 
-    // If forwarding is successful, store the log locally
     const logToStore = {
       timestamp: new Date().toISOString(),
       logData: req.body,
@@ -65,7 +64,7 @@ app.post('/api/logs', async (req, res) => {
     
     logs.push(logToStore);
     await fs.writeFile(LOG_FILE_PATH, JSON.stringify(logs, null, 2));
-    console.log('✅ Log successfully stored in logs.json');
+    console.log('Log successfully stored in logs.json');
 
     res.status(200).json(externalApiResponse.data);
   } catch (error) {
@@ -75,5 +74,5 @@ app.post('/api/logs', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Middleware server is running on http://localhost:${PORT}`);
+  console.log(`Middleware server is running on http://localhost:${PORT}`);
 });
